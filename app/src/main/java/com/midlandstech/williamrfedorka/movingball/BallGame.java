@@ -14,12 +14,15 @@ public class BallGame {
     private float ballSpeedY;
     private float ballDirectionX = 1;
     private float ballDirectionY = 1;
+    private boolean ballMoving;
 
 
     public BallGame(int newBallRadius, float newBallSpeedX, float newBallSpeedY) {
         ballSpeedX = newBallSpeedX;
         ballSpeedX = newBallSpeedX;
         ballRadius = newBallRadius;
+
+        ballMoving = true;
     }
 
     public Point getBallCenter() {
@@ -30,16 +33,8 @@ public class BallGame {
         ballCenter = newBallCenter;
     }
 
-    public Rect getSpaceRect() {
-        return spaceRect;
-    }
-
     public void setSpaceRect(Rect newSpaceRect) {
         spaceRect = newSpaceRect;
-    }
-
-    public int getDeltaTime() {
-        return deltaTime;
     }
 
     public void setDeltaTime(int newDeltaTime) {
@@ -56,11 +51,17 @@ public class BallGame {
         else if (spaceRect.bottom + ballRadius >= ballCenter.y)
             ballDirectionY = 1;
 
-        ballCenter.x += ballSpeedX * ballDirectionX * deltaTime;
-        ballCenter.y += ballSpeedY * ballDirectionY * deltaTime;
+        if (ballMoving == true) {
+            ballCenter.x += ballSpeedX * ballDirectionX * deltaTime;
+            ballCenter.y += ballSpeedY * ballDirectionY * deltaTime;
+        }
     }
 
     public float getBallRadius() {
         return ballRadius;
+    }
+
+    public void setBallMoving(boolean newBallMoving) {
+        ballMoving = newBallMoving;
     }
 }
