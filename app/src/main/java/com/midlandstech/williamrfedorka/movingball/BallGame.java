@@ -35,8 +35,8 @@ public class BallGame {
         return ballAngle;
     }
 
-    public void setBallAngle(float ballAngle) {
-        this.ballAngle = ballAngle;
+    public void setBallAngle(float newBallAngle) {
+        ballAngle = newBallAngle;
     }
 
     public float getBallSpeed() {
@@ -73,6 +73,6 @@ public class BallGame {
     }
     
     public boolean ballOffScreen() {
-        return ballCenter.x - ballRadius > spaceRect.right || ballCenter.y + ballRadius < 0;
+        return ballCenter.x > spaceRect.right || ballCenter.x < spaceRect.left || ballCenter.y + ballRadius < 0 || ballCenter.y < spaceRect.top || ballCenter.y > spaceRect.bottom;
     }
 }

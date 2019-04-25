@@ -18,7 +18,7 @@ public class GameView extends View {
         super(context);
         
         game = new BallGame(150, .03f);
-        game.setBallSpeed(width * .00003f);
+        game.setBallSpeed(width * .0003f);
         game.setDeltaTime(DELTA_TIME);
         game.setSpaceRect(new Rect(0, 0, width, height));
         game.setBallCenter(new Point(750,950));

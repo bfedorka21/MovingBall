@@ -1,11 +1,13 @@
 package com.midlandstech.williamrfedorka.movingball;
 
+import java.util.Random;
 import java.util.TimerTask;
 
 public class BallTimerTask extends TimerTask {
 
     private BallGame game;
     private GameView gameView;
+    private Random random;
 
     public BallTimerTask(GameView view) {
         gameView = view;
@@ -13,8 +15,10 @@ public class BallTimerTask extends TimerTask {
     }
 
     public void run() {
+
+        random = new Random();
         if (game.ballOffScreen()) {
-            game.setBallAngle(180 - game.getBallAngle());
+            game.setBallAngle(random.nextInt(180));
             game.moveBall();
         }
         else
