@@ -10,37 +10,16 @@ public class BallGame {
 
     private Point ballCenter;
     private int ballRadius;
-    private float ballSpeed;
-    private float ballAngle;
+    private float ballSpeedX;
+    private float ballSpeedY;
+    private float ballDirectionX = 1;
+    private float ballDirectionY = 1;
 
 
-    public BallGame(int newBallRadius, float newBallSpeed) {
-        setBallSpeed(newBallSpeed);
-        setBallRadius(newBallRadius);
-    }
-
-    void setBallSpeed(float newBallSpeed) {
-        ballSpeed = newBallSpeed;
-    }
-
-    private void setBallRadius(int newBallRadius) {
+    public BallGame(int newBallRadius, float newBallSpeedX, float newBallSpeedY) {
+        ballSpeedX = newBallSpeedX;
+        ballSpeedX = newBallSpeedX;
         ballRadius = newBallRadius;
-    }
-
-    public int getBallRadius() {
-        return ballRadius;
-    }
-
-    public float getBallAngle() {
-        return ballAngle;
-    }
-
-    public void setBallAngle(float newBallAngle) {
-        ballAngle = newBallAngle;
-    }
-
-    public float getBallSpeed() {
-        return ballSpeed;
     }
 
     public Point getBallCenter() {
@@ -68,11 +47,20 @@ public class BallGame {
     }
     
     public void moveBall() {
-        ballCenter.x += ballSpeed * Math.cos(ballAngle) * deltaTime;
-        ballCenter.y -= ballSpeed * Math.sin(ballAngle) * deltaTime;
+        if (spaceRect.right - ballRadius <= ballCenter.x)
+            ballDirectionX = -1;
+        else if(spaceRect.left + ballRadius >= ballCenter.x)
+            ballDirectionX = 1;
+        if (spaceRect.top - ballRadius <= ballCenter.y)
+            ballDirectionY = -1;
+        else if (spaceRect.bottom + ballRadius >= ballCenter.y)
+            ballDirectionY = 1;
+
+        ballCenter.x += ballSpeedX * ballDirectionX * deltaTime;
+        ballCenter.y += ballSpeedY * ballDirectionY * deltaTime;
     }
-    
-    public boolean ballOffScreen() {
-        return ballCenter.x > spaceRect.right || ballCenter.x < spaceRect.left || ballCenter.y + ballRadius < 0 || ballCenter.y < spaceRect.top || ballCenter.y > spaceRect.bottom;
+
+    public float getBallRadius() {
+        return ballRadius;
     }
 }

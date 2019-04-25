@@ -9,7 +9,7 @@ import android.view.View;
 
 public class GameView extends View {
 
-    public static int DELTA_TIME = 100;
+    public static int DELTA_TIME = 1;
 
     private Paint paint;
     private BallGame game;
@@ -17,16 +17,14 @@ public class GameView extends View {
     public GameView(Context context, int width, int height) {
         super(context);
         
-        game = new BallGame(150, .03f);
-        game.setBallSpeed(width * .0003f);
+        game = new BallGame(150, 1, 1);
         game.setDeltaTime(DELTA_TIME);
         game.setSpaceRect(new Rect(0, 0, width, height));
         game.setBallCenter(new Point(750,950));
-        
+
         paint = new Paint();
         paint.setColor(0xFF000000);
         paint.setAntiAlias(true);
-        paint.setStrokeWidth( game.getBallRadius( ) );
     }
 
     public void onDraw(Canvas canvas) {
